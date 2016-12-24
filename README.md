@@ -8,7 +8,7 @@ Afterwards, you should apply it in file `/helpers/app.js`, variable `INSTAGRAM_T
 
 ###Demo
 
-![React-Native-Instagram Demo Image](http://i.giphy.com/l0MYGRo6rgddPGvFm.gif)
+![React-Native-Instagram Demo Image](http://i.giphy.com/l0MYFQ70maUZPcaf6.gif)
 
 Functionality is developed using the Instagram API.
 
