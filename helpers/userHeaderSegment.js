@@ -7,47 +7,74 @@ TouchableOpacity,
 Text
 } from "react-native";
 
+import Icon from 'react-native-vector-icons/Ionicons';
+
 class HeaderSegment extends Component {
+  renderToolbar(){
+    const tabs = ["md-grid","ios-list-outline","ios-albums-outline","ios-bookmark-outline"]
+    return(
+      <View style={styles.toolbarContainer}>
+        {
+          tabs.map((item,i)=>{
+            const backgroundColor = (this.props.selectedTab === i) ? "blue": "black"
+            return(
+              <TouchableOpacity onPress = { ()=> this.pressTabbarButton(i) }>
+                <Icon name={item} size={34} color={backgroundColor} />
+              </TouchableOpacity>
+            )
+          })
+        }
+      </View>
+    )
+  }
+  pressTabbarButton(selectedTab){
+    this.props.changeSelectedTab(selectedTab)
+  }
   render() {
     if(this.props.data){
       return(
-       <View style={styles.containerTop}>
-        <View style={styles.profileImageContainer}>
-          <Image style={styles.profilIcon} source={{uri: this.props.data.profile_picture }} /> 
-          <Text style={styles.textUsername}> { this.props.data.full_name } </Text>
-        </View>
-         <View style={styles.infoContainer}>
-           <View style={styles.followersContainer}>
-            <View style={styles.followerColumn}>
-              <Text style={styles.countText}>
-                {this.props.data.counts.media}
-              </Text>    
-              <Text style={styles.text}>
-                media
-              </Text>  
-            </View>
-            <View style={styles.followerColumn}>
-              <Text style={styles.countText}>
-                {this.props.data.counts.follows}
-              </Text>    
-              <Text style={styles.text}>
-                followers
-              </Text>  
-            </View>
-            <View style={styles.followerColumn}>
-              <Text style={styles.countText}>
-                {this.props.data.counts.followed_by}
-              </Text>    
-              <Text style={styles.text}>
-                follows by
-              </Text>  
-            </View>
+        <View> 
+         <View style={styles.containerTop}>
+          <View style={styles.profileImageContainer}>
+            <Image style={styles.profilIcon} source={{uri: this.props.data.profile_picture }} /> 
+            <Text style={styles.textUsername}> { this.props.data.full_name } </Text>
+          </View>
+           <View style={styles.infoContainer}>
+             <View style={styles.followersContainer}>
+              <View style={styles.followerColumn}>
+                <Text style={styles.countText}>
+                  {this.props.data.counts.media}
+                </Text>    
+                <Text style={styles.text}>
+                  media
+                </Text>  
+              </View>
+              <View style={styles.followerColumn}>
+                <Text style={styles.countText}>
+                  {this.props.data.counts.follows}
+                </Text>    
+                <Text style={styles.text}>
+                  followers
+                </Text>  
+              </View>
+              <View style={styles.followerColumn}>
+                <Text style={styles.countText}>
+                  {this.props.data.counts.followed_by}
+                </Text>    
+                <Text style={styles.text}>
+                  follows by
+                </Text>  
+              </View>
+             </View>
+             <TouchableOpacity style={styles.button} onPress={() => alert('edit')}>
+               <Text>
+                 Edit Profile
+               </Text>
+             </TouchableOpacity>
            </View>
-           <TouchableOpacity style={styles.button} onPress={() => alert('edit')}>
-             <Text>
-               Edit Profile
-             </Text>
-           </TouchableOpacity>
+         </View>
+         <View style={{alignSelf:'stretch',height:50,backgroundColor:'white'}}>
+           {this.renderToolbar()}
          </View>
        </View>
       );
@@ -98,7 +125,6 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignSelf:'stretch',
     justifyContent: 'space-around'
-
   },
   followerColumn:{
     alignItems:'center',
@@ -114,6 +140,15 @@ const styles = StyleSheet.create({
   infoContainer:{
     flex:1,
     alignSelf:'stretch',
+  },
+  toolbarContainer:{
+    flexDirection:'row',
+    justifyContent:'space-around',
+    alignItems:'center',
+    flex:1,
+    borderBottomWidth:1,
+    borderTopWidth:1,
+    borderColor:'rgb(219,219,219)'
   }
 })
 

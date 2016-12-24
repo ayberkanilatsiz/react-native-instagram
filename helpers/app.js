@@ -21,13 +21,16 @@ class App extends Component {
   constructor(props){
   super(props)
   this.renderHeader = this.renderHeader.bind(this)
+  this.changeSelectedTab = this.changeSelectedTab.bind(this)
    const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     this.state = {
       dataSource: dataSource.cloneWithRows([]),
       isReady : false,
-      userInfo:{data:null}
+      userInfo:{data:null},
+      selectedTab : 1
+
     };
   }
   getInstagramByMyself (access_token) {
@@ -104,11 +107,13 @@ class App extends Component {
   renderRow(rowData){
     if(rowData.hasOwnProperty('images')){
       return(
-        <Row data = {rowData}/>
+        <Row data = { rowData }/>
       )
     }
     else{
-      return(<Text>Yükleniyor!</Text>)  
+      return(
+        <View/>  
+      )  
     }
   }
   renderSeparator (secId,rowId){
@@ -118,9 +123,14 @@ class App extends Component {
   }
   renderHeader(){
     return(
-      <UserHeader data = { this.state.userInfo.data }/>
+      <UserHeader data = { this.state.userInfo.data } changeSelectedTab = { this.changeSelectedTab } selectedTab = { this.state.selectedTab } />
     )
   }
+  changeSelectedTab(tab){
+    this.setState({selectedTab:tab})
+  }
+
+
 }
 
 const styles = StyleSheet.create({
