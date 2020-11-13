@@ -124,7 +124,7 @@ class Row extends Component {
 
 const styles = StyleSheet.create({
   container: {backgroundColor:'white',paddingTop:5},
-  infoContainer : {flexDirection:'row',height:45,alignSelf:'stretch'},
+  infoContainer : {flexDirection:'row',height:45,alignSelf:'stretch', marginBottom: 5},
   image: {borderRadius : 20 , width:40 , height:40, marginHorizontal :3 , marginVertical : 3 },
   usernameContainer: {justifyContent:'center',flexDirection:'column'},
   location: {fontSize:10},
